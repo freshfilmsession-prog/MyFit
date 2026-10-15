@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi Rutina</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121826;--card:#1a2233;--c2:#232d42;--tx:#f3f6fb;--mu:#8c98b0;--ln:#2c3750;--on:#0f1522;--dc:#ff4d5e;--gd:#ffc233;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef1f6;--card:#fff;--c2:#e6eaf2;--tx:#121826;--mu:#5c677d;--ln:#d5dbe7;--on:#fff;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#121826;color-scheme:dark}
+:root[data-theme="light"]{--bg:#eef1f6;--card:#fff;--c2:#e6eaf2;--tx:#121826;--mu:#5c677d;--ln:#d5dbe7;--on:#fff;--gd:#b57d00;color-scheme:light}
+.top{flex-wrap:wrap;gap:8px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:500 16px/1.35 Barlow,system-ui,-apple-system,Segoe UI,sans-serif;padding:0 14px 40px;max-width:560px;margin:0 auto}
+h1,h2,.num{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:800;letter-spacing:.2px;margin:0}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 8px}
+.top h1{font-size:26px}
+.wk{display:flex;align-items:center;gap:6px;background:var(--card);border-radius:999px;padding:4px}
+.wk button{width:36px;height:36px;border-radius:50%;font-size:20px;color:var(--mu)}
+.wk span{font-size:14px;font-weight:600;min-width:104px;text-align:center}
+.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:8px 0 14px}
+.tb{background:var(--card);border-radius:14px;padding:8px 0 7px;text-align:center;border:2px solid transparent}
+.tb b{display:block;font:800 20px "Barlow Condensed",sans-serif}
+.tb i{display:block;font-style:normal;font-size:12px;color:var(--mu)}
+.tb.on{border-color:var(--dc);background:var(--c2)}
+.tb.ok i{color:var(--dc);font-weight:700}
+.hero{display:flex;align-items:center;gap:18px;background:var(--card);border-radius:24px;padding:18px;margin-bottom:6px}
+.ring{--p:0;width:112px;height:112px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--dc) calc(var(--p)*1%),var(--c2) 0)}
+.ring div{width:88px;height:88px;border-radius:50%;background:var(--card);display:grid;place-items:center;font:800 32px "Barlow Condensed",sans-serif}
+.hero h2{font-size:28px;line-height:1.05}
+.hero p{margin:4px 0 0;color:var(--mu);font-size:15px}
+.hero .win{color:var(--dc);font-weight:700}
+.ex{background:var(--card);border-radius:20px;margin:10px 0;border:2px solid transparent;overflow:hidden}
+.ex.done{border-color:var(--dc)}
+.hd{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 12px}
+.ck{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--ln);flex:none;display:grid;place-items:center;font-size:24px;font-weight:800;color:transparent;background:var(--c2)}
+.done .ck{background:var(--dc);border-color:var(--dc);color:var(--on)}
+.nm{flex:1;text-align:left;min-width:0}
+.nm b{display:block;font-weight:600;font-size:17px;line-height:1.2}
+.nm small{color:var(--mu);font-size:14px}
+.chev{color:var(--mu);font-size:18px;transition:transform .2s;padding:6px}
+.open .chev{transform:rotate(180deg)}
+.sets{padding:0 14px 14px}
+.sr{display:grid;grid-template-columns:34px 1fr 1fr 48px;gap:8px;align-items:center;margin-top:8px}
+.sr>span{font:800 20px "Barlow Condensed",sans-serif;color:var(--mu);text-align:center}
+.sr label{display:block;position:relative}
+.sr input{width:100%;height:48px;border-radius:12px;border:2px solid var(--ln);background:var(--c2);color:var(--tx);font:700 20px Barlow,sans-serif;text-align:center;padding:0 22px 0 4px;min-width:0}
+.sr input:focus{outline:none;border-color:var(--dc)}
+.sr label em{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-style:normal;font-size:12px;color:var(--mu);pointer-events:none}
+.sr button{height:48px;border-radius:12px;background:var(--c2);border:2px solid var(--ln);font-size:22px;font-weight:800;color:transparent}
+.sr button.x{background:var(--dc);border-color:var(--dc);color:var(--on)}
+.hint{color:var(--mu);font-size:13px;margin:10px 2px 0}
+.wcard{background:var(--card);border-radius:24px;padding:18px;margin-top:20px}
+.wcard h2{font-size:26px;display:flex;justify-content:space-between;align-items:baseline}
+.wcard h2 span{color:var(--dc);font-size:34px}
+.wm{color:var(--mu);margin:2px 0 12px;font-size:15px}
+.br{display:grid;grid-template-columns:38px 1fr 46px;gap:10px;align-items:center;margin:9px 0;font-size:15px}
+.br b{font:800 18px "Barlow Condensed",sans-serif}
+.bar{height:12px;border-radius:99px;background:var(--c2);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px}
+.br em{font-style:normal;text-align:right;font-weight:700}
+.pb{font:800 20px "Barlow Condensed",sans-serif;color:var(--mu);padding:0 2px}.pb.f{color:var(--dc)}
+.ds{margin:0 0 6px;color:var(--mu);font-size:15px;line-height:1.4}
+.ov{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top,0px) 16px env(safe-area-inset-bottom,0px);overflow:auto}.ov[hidden]{display:none}
+#tn{font:800 clamp(140px,48vw,240px)/1 "Barlow Condensed",sans-serif;color:var(--dc)}
+.tl{font:700 26px "Barlow Condensed",sans-serif;text-align:center}.tl small{display:block;color:var(--mu);font:500 16px Barlow,sans-serif}
+.tc{display:flex;gap:10px;margin-top:24px}.tc button{height:58px;padding:0 22px;border-radius:16px;background:var(--card);border:2px solid var(--ln);font-weight:700;font-size:18px}.tc .p{background:var(--dc);border-color:var(--dc);color:var(--on)}
+#st{justify-content:flex-start}.si{width:100%;max-width:560px;margin:0 auto;padding-bottom:30px}
+.ib{height:40px;padding:0 14px;border-radius:999px;background:var(--card);font-weight:600;font-size:16px;vertical-align:middle}
+.fl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.fl select{height:46px;width:100%;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);font:600 15px Barlow,sans-serif;padding:0 8px}
+.sm{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sm div{background:var(--card);border-radius:16px;padding:12px 4px;text-align:center}.sm b{display:block;font:800 28px "Barlow Condensed",sans-serif;color:var(--dc)}.sm span{font-size:13px;color:var(--mu)}
+.tb2{width:100%;border-collapse:collapse;margin-top:14px;font-size:15px}.tb2 th,.tb2 td{padding:8px 3px;text-align:right;border-bottom:1px solid var(--ln)}.tb2 th:first-child,.tb2 td:first-child{text-align:left}.tb2 th{color:var(--mu);font-weight:600;font-size:13px}
+.rr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 2px;font-weight:600}.rr label{position:relative;width:120px}.rr input{width:100%;height:46px;border-radius:12px;border:2px solid var(--ln);background:var(--c2);color:var(--tx);font:700 20px Barlow,sans-serif;text-align:center;padding:0 32px 0 4px}.rr em{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-style:normal;font-size:12px;color:var(--mu)}
+.mr{--p:0;width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--dc) calc(var(--p)*1%),var(--c2) 0)}.mr i{width:33px;height:33px;border-radius:50%;background:var(--card);display:grid;place-items:center;font:800 14px "Barlow Condensed",sans-serif;font-style:normal}.mr.xr{background:conic-gradient(var(--gd) calc(var(--p)*1%),var(--c2) 0)}.mr.xr i{color:var(--gd)}
+.hd{gap:8px}.hero.x{gap:12px}.hero.x .ring{width:92px;height:92px}.hero.x .ring>div{width:70px;height:70px;font-size:26px}.ring.r2{width:64px!important;height:64px!important;background:conic-gradient(var(--gd) calc(var(--p)*1%),var(--c2) 0)}.ring.r2>div{width:48px!important;height:48px!important;font-size:18px!important;color:var(--gd)}
+.hsb{margin-top:8px;border-top:1px solid var(--ln)}.hm{margin:12px 0 4px;font-weight:600;line-height:1.35}
+.ab .fb{flex:1;height:46px;border-radius:12px;background:var(--c2);border:2px solid var(--ln);font-weight:600;display:grid;place-items:center;cursor:pointer}
+#tn.z{color:var(--gd)}
+#ph{justify-content:center}#ph .si{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+#pn{font:800 clamp(100px,30vw,170px)/1 "Barlow Condensed",sans-serif;color:var(--dc)}#pn.z{color:var(--gd)}
+.ivb{width:46px;height:38px;border-radius:10px;background:var(--dc);color:var(--on);font-weight:800;flex:none}.ivr{align-items:center}
+.nt{width:100%;min-height:54px;margin:8px 0 0;border-radius:12px;border:2px solid var(--ln);background:var(--c2);color:var(--tx);font:500 15px Barlow,sans-serif;padding:8px}
+.ei{width:100%;height:44px;border-radius:12px;border:2px solid var(--ln);background:var(--c2);color:var(--tx);font:600 16px Barlow,sans-serif;padding:0 10px;margin-top:8px}#ed{justify-content:flex-start}.ex .fl{margin:0}
+.rk{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}.rk i{aspect-ratio:1;border-radius:8px;background:var(--c2);display:grid;place-items:center;font:700 14px "Barlow Condensed",sans-serif;font-style:normal;color:var(--mu)}
+.ph{display:inline-block;margin:2px 0 8px;color:var(--dc);font-weight:600;font-size:15px}
+.ivr{display:flex;justify-content:space-between;gap:8px;background:var(--c2);border-radius:12px;padding:10px 14px;margin-top:6px;font-weight:600;font-size:15px}
+.ab{display:flex;gap:8px;margin-top:12px}.ab button{flex:1;height:46px;border-radius:12px;background:var(--c2);border:2px solid var(--ln);font-weight:600}.ab button.p{border-color:var(--dc);color:var(--dc)}
+.rs{display:block;margin:18px auto 0;color:var(--mu);font-size:14px;padding:10px;text-decoration:underline}
+</style></head><body>
+<div class="top"><h1>Mi Rutina <button class="ib" onclick="so()" aria-label="Estadísticas">📊</button> <button class="ib" id="thb" onclick="tht()" aria-label="Modo claro u oscuro">☀️</button></h1><div class="wk"><button onclick="sw(-1)" aria-label="Semana anterior">‹</button><span id="wl"></span><button onclick="sw(1)" aria-label="Semana siguiente">›</button></div></div>
+<div class="tabs" id="tabs"></div>
+<div id="main"></div>
+<div id="wk"></div><div id="rk"></div>
+<div class="ab"><button onclick="eo()">✏️ Editar rutina</button></div><button class="rs" onclick="rd()">Reiniciar este día</button>
+<div class="ov" id="rt" hidden><div class="tl" id="tl"></div><div id="tn">0</div><div class="tc"><button onclick="ta(-15)">−15 s</button><button class="p" onclick="tx()">Saltar</button><button onclick="ta(15)">+15 s</button></div><button class="rs" id="mxb" onclick="mxt()"></button></div>
+<div class="ov" id="st" hidden><div class="si" id="si"></div></div>
+<div class="ov" id="ph" hidden><div class="si" id="pk"></div></div>
+<div class="ov" id="ed" hidden><div class="si" id="ei2"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const C=['#ff4d5e','#3d9bff','#2ed573','#ff9f1a','#b36bff','#ffd32a'],L=['L','M','X','J','V','S'],N=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],T=['Pecho + hombros + tríceps','Espalda + bíceps','Piernas + abdomen','Espalda + bíceps','Pecho + hombros + tríceps','Piernas + glúteos + abdomen'],M=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const IV=[['0–5',5,3],['5–10',8,'3,8'],['10–15',11,4],['15–20',9,3],['20–25',12,'4,5']];
+const c=(n,m,d,t)=>[n,0,m,0,d,t],x=(n,r,t,d)=>[n,3,r,t,d];
+const dPP='Máquina donde estás sentado, con dos asas delante del pecho. Empuja las asas hacia delante y vuelve despacio.',dEL='Con dos mancuernas pequeñas: brazos a los lados, súbelos hasta la altura de los hombros y baja despacio.',dTR='Máquina o polea donde empujas las manos hacia abajo.',dJA='Máquina con asiento y una barra encima de la cabeza. Agarra la barra y tira de ella hacia la parte superior del pecho; luego deja que suba despacio.',dGL='Máquina de glúteos o de empuje de cadera, si la hay. Si no, usa otra máquina de piernas.',dGE='Sube el cuerpo apoyándote en las puntas de los pies y baja despacio.',dPR='Máquina donde estás sentado y empujas una plataforma grande con los pies.';
+const Q={'Press de pecho':'chest press machine','Press de pecho inclinado':'incline chest press machine','Apertura de pecho':'pec fly machine','Press de hombros':'shoulder press machine','Elevaciones laterales':'dumbbells','Tríceps (máquina o polea)':'triceps extension machine','Jalón al pecho':'lat pulldown machine','Remo sentado':'seated row machine','Máquina de espalda':'rear row machine','Bíceps en máquina':'biceps curl machine','Bíceps con mancuernas':'dumbbells','Prensa de piernas':'leg press machine','Extensión de piernas':'leg extension machine','Curl de piernas':'seated leg curl machine','Gemelos':'calf raise machine','Glúteos (máquina)':'glute machine','Segundo ejercicio de tríceps':'cable pulley machine','Calentamiento en cinta':'treadmill','Cinta en subida':'treadmill'};
+const CW=c('Calentamiento en cinta','7 min','Camina rápido en la cinta. No hace falta correr.'),CI=c('Cinta en subida','25 min','Cambia la inclinación y la velocidad cada 5 minutos:','t');
+const AB=t=>x('Abdominales + plancha','15 abd + plancha '+t,'30–45','No hay máquina. Cada serie es una vuelta: 15 abdominales normales y plancha en el suelo. Descansa 30–45 s entre vueltas.');
+const PP=x('Press de pecho','10–12',90,dPP),AP=x('Apertura de pecho','12–15',60,'Máquina donde apoyas los brazos a los lados y tienes que juntarlos delante del pecho.'),PH=x('Press de hombros','10–12',75,'Máquina con asiento y dos asas a la altura de los hombros. Empuja las asas hacia arriba y vuelve despacio.'),EL=x('Elevaciones laterales','12–15',60,dEL),TR=x('Tríceps (máquina o polea)','10–15',60,dTR),
+JA=x('Jalón al pecho','10–12',90,dJA),RS=x('Remo sentado','10–12',75,'Máquina donde estás sentado y tiras de unas asas hacia tu barriga.'),ME=x('Máquina de espalda','10–12',75,'Otra máquina sentado en la que tiras de dos asas hacia atrás. Piensa en llevar los codos hacia atrás.'),BM=x('Bíceps en máquina','10–15',60,'Máquina donde apoyas los brazos y doblas los codos para subir las manos.'),BC=x('Bíceps con mancuernas','10–12',60,'Una pesa en cada mano, brazos pegados al cuerpo. Dobla los codos para subir las pesas y baja despacio.'),
+PR=x('Prensa de piernas','10–12',90,dPR),EX=x('Extensión de piernas','12–15',60,'Sentado, con una almohadilla delante de las piernas. Súbela estirando las rodillas.'),CU=x('Curl de piernas','10–15',60,'Máquina para la parte de atrás de las piernas. Dobla las rodillas llevando los talones hacia el culo.'),GE=x('Gemelos','15–20','45–60',dGE);
+const D=[
+[CW,PP,x('Press de pecho inclinado','10–12',75,'Máquina o banco sentado, con el pecho inclinado un poco hacia arriba. Empuja las asas hacia delante y algo hacia arriba. Si no la hay, haz otra serie de press de pecho normal.'),AP,PH,EL,TR,CI],
+[CW,JA,RS,ME,BM,BC,CI],
+[CW,PR,EX,CU,x('Glúteos (máquina)','10–12',90,dGL),GE,AB('30 s'),CI],
+[CW,JA,RS,ME,BM,BC,AB('30 s'),CI],
+[CW,x('Press de pecho','8–12',90,dPP),AP,PH,EL,TR,x('Segundo ejercicio de tríceps','10–15',60,'Si hay una polea para trabajar el tríceps desde arriba, haz otro ejercicio con ella. Si no, repite el ejercicio anterior.'),CI],
+[CW,PR,EX,CU,x('Glúteos (máquina)','10–15','75–90',dGL),GE,AB('30–40 s'),CI]];
+let S={w:{},l:{}};try{S=JSON.parse(localStorage.getItem('rut1'))||S}catch(e){}
+const sv=()=>{S.t=Date.now();try{localStorage.setItem('rut1',JSON.stringify(S))}catch(e){}ps2()};S.r=S.r||{};const D0=JSON.parse(JSON.stringify(D));ap();
+const rr=(i,j)=>{const v=+S.r[i+'_'+j];return v>0?v:(parseInt(D[i][j][3])||60)};
+function ss(i,j,v){const n=parseInt(v);if(n>0){S.r[i+'_'+j]=n;sv()}}
+let AC,TE=0,TI=0,TL=-1,TO=0,TA=null,TK=0,WL=null,MX=S.mx!==0,OS=[];
+function sq(s,len,f){const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.7,s+.02);g.gain.setValueAtTime(.7,s+len-.06);g.gain.exponentialRampToValueAtTime(.0001,s+len);o.start(s);o.stop(s+len+.05);OS.push(o)}
+let KA=null;function kx(){try{if(KA)KA.stop()}catch(e){}KA=null}
+function ka(){kx();if(MX&&AC){try{const o=AC.createOscillator(),g=AC.createGain();g.gain.value=.0001;o.connect(g);g.connect(AC.destination);o.start();KA=o}catch(e){}}}
+function stp(){OS.forEach(o=>{try{o.stop()}catch(e){}});OS=[]}
+function mxl(){document.getElementById('mxb').textContent='🎵 Pitidos sobre mi música: '+(MX?'sí':'no (pausa la música)');try{if(navigator.audioSession)navigator.audioSession.type=MX?'ambient':'playback'}catch(e){}}
+function mxt(){MX=!MX;S.mx=MX?1:0;sv();mxl();kx();if(MX)ka();const m=(TE-Date.now())/1000;if(m>0)trk(m)}
+function au(){try{if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();const s=AC.createBufferSource();s.buffer=AC.createBuffer(1,1,22050);s.connect(AC.destination);s.start(0)}if(AC.state!='running')AC.resume()}catch(e){}}
+function wv(f,d){const sr=22050,n=Math.round(sr*d),b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);for(let i=0;i<n;i++){const e=Math.min(1,i/200,(n-i)/400);v.setInt16(44+i*2,Math.sin(2*Math.PI*f*i/sr)*32000*e,true)}let s='';const u=new Uint8Array(b);for(let i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return new Audio('data:audio/wav;base64,'+btoa(s))}
+let A1,A2;try{A1=wv(880,.2);A2=wv(1175,.95)}catch(e){}
+function ul(){au();[A1,A2].forEach(a=>{try{a.muted=true;const p=a.play();if(p&&p.then)p.then(()=>{a.pause();a.currentTime=0;a.muted=false}).catch(()=>{a.muted=false})}catch(e){}})}
+function bp(len,f){if(MX)return wb(len,f);const a=len>.5?A2:A1;try{a.muted=false;a.currentTime=0;const p=a.play();if(p&&p.catch)p.catch(()=>wb(len,f))}catch(e){wb(len,f)}}
+function tp(){ul();setTimeout(()=>bp(.18,880),400);setTimeout(()=>bp(.18,880),800);setTimeout(()=>bp(.95,1175),1200)}
+function wb(len,f){try{au();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type='square';o.frequency.value=f;o.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.6,t+.02);g.gain.setValueAtTime(.6,t+len-.06);g.gain.exponentialRampToValueAtTime(.0001,t+len);o.start(t);o.stop(t+len+.05)}catch(e){}}
+const vb=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
+function wt(rem){const sr=8000,n=Math.max(1,Math.round(sr*rem)),b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);[[3,.2,880],[2,.2,880],[1,.95,1175]].forEach(([k,d,f])=>{const s0=n-k*sr,l=Math.round(d*sr);if(s0<0)return;for(let i=0;i<l&&s0+i<n;i++){const e=Math.min(1,i/80,(l-i)/160);v.setInt16(44+(s0+i)*2,Math.sin(2*Math.PI*f*i/sr)*30000*e,true)}});const u=new Uint8Array(b);let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return new Audio('data:audio/wav;base64,'+btoa(s))}
+function trk(rem){stp();try{if(TA)TA.pause()}catch(e){}TK=0;if(MX)return;try{TA=wt(rem);const p=TA.play();if(p&&p.then)p.then(()=>{TK=1}).catch(()=>{TK=0});else TK=1}catch(e){TK=0}}
+function rest(sec,t1,t2){mxl();ul();ka();clearInterval(TI);clearTimeout(TO);TE=Date.now()+sec*1000;TL=-1;document.getElementById('tl').innerHTML=t1+'<small>'+t2+'</small>';document.getElementById('rt').hidden=false;try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>{WL=l}).catch(()=>{})}catch(e){}TI=setInterval(tt,120);trk(sec);tt()}
+function tt(){const r=Math.ceil((TE-Date.now())/1000);if(r===TL)return;TL=r;const n=document.getElementById('tn');if(r>0){n.textContent=r;n.className=r<=3?'z':'';if(MX&&r<=5)au();if(r==1){if(!TK)bp(.95,1175);vb(600)}else if(r<=3){if(!TK)bp(.18,880);vb(90)}}else{clearInterval(TI);n.className='';n.textContent='¡YA!';TO=setTimeout(tx,2200)}}
+function tx(){stp();kx();clearInterval(TI);clearTimeout(TO);TK=0;try{if(TA)TA.pause()}catch(e){}try{if(WL)WL.release()}catch(e){}WL=null;document.getElementById('rt').hidden=true}
+function ta(d){TE+=d*1000;TL=-1;clearInterval(TI);clearTimeout(TO);TI=setInterval(tt,120);const m=(TE-Date.now())/1000;if(m>0)trk(m);else{stp();TK=0;try{if(TA)TA.pause()}catch(e){}}tt()}
+const mon=o=>{const d=new Date();d.setDate(d.getDate()-(d.getDay()+6)%7+o*7);d.setHours(0,0,0,0);return d};
+const ky=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+let wo=0,di=Math.min((new Date().getDay()+6)%7,5),op=null;
+const K=()=>ky(mon(wo));
+const gt=(i,j)=>(((S.w[K()]||{})['d'+i]||{})['e'+j]);
+const rc=(i,j)=>{const w=S.w[K()]=S.w[K()]||{},d=w['d'+i]=w['d'+i]||{};return d['e'+j]=d['e'+j]||{done:0,s:[]}};
+const ck=r=>r?(r.s||[]).filter(q=>q&&q.x).length:0;
+const ns=(i,j)=>{const r=gt(i,j);return Math.max(3,(r&&r.n)||3)};
+const ep=(i,j)=>{const r=gt(i,j);if(!r)return 0;if(!D[i][j][1]){if(D[i][j][5]=='t'&&!r.done)return Math.round((r.ph||[]).filter(Boolean).length/5*100);return r.done?100:0}const p=Math.round(ck(r)/3*100);return r.done?Math.max(p,100):p};
+const pc=i=>{let k=0,t=0,n=0;D[i].forEach((e,j)=>{if(e[6])return;n++;const p=ep(i,j);if(p>=100)k++;t+=Math.min(p,100)});return[k,n,Math.round(t/(n||1))]};
+function sd(i){di=i;op=null;rn()}function sw(o){wo+=o;op=null;rn()}
+function tg(i,j){const r=rc(i,j);if(D[i][j][1]&&ep(i,j)>=100){r.done=0;r.s.forEach(q=>{if(q)q.x=0})}else{r.done=r.done?0:1;if(!r.done)r.ph=[];else tm(i)}sv();rn()}
+function ex(j){op=op===j?null:j;rn()}
+function ad(i,j){rc(i,j).n=ns(i,j)+1;sv();rn()}
+function rm(i,j){const r=rc(i,j),n=ns(i,j);if(n>3){r.s.length=Math.min(r.s.length,n-1);r.n=n-1;if(ck(r)<3&&!r.m)r.done=0;sv();rn()}}
+function inp(i,j,s,f,v){const r=rc(i,j);r.s[s]=r.s[s]||{};r.s[s][f]=v;if(f=='w'&&v!==''){const a=S.l[i+'_'+j]=S.l[i+'_'+j]||[];a[s]=v}sv()}
+function sc(i,j,s){const r=rc(i,j);r.s[s]=r.s[s]||{};r.s[s].x=r.s[s].x?0:1;if(ck(r)>=3)r.done=1;else if(!r.s[s].x)r.done=0;if(r.s[s].x){r.s[s].t=Date.now();tm(i)}sv();rn();if(r.s[s].x)rest(rr(i,j),D[i][j][0],'Serie '+(s+1)+' hecha · descansa')}
+function rd(){if(confirm('¿Borrar lo marcado de este día en esta semana?')){const w=S.w[K()];if(w)delete w['d'+di];sv();rn()}}
+const MN=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const fd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function rws(){const o=[];for(const k in S.w){const[y,m,d]=k.split('-').map(Number),w=S.w[k];for(const dk in w){const i=+dk.slice(1);for(const ek in w[dk]){const j=+ek.slice(1),e=D[i]&&D[i][j],r=w[dk][ek];if(!e)continue;const f=fd(new Date(y,m-1,d+i)),b={f,mo:f.slice(0,7),k,i,n:e[0],dr:parseInt(e[2])||1};if(e[1]&&ck(r))(r.s||[]).forEach((q,s)=>{if(q&&q.x)o.push({...b,s:s+1,r:+q.r||0,w:+q.w||0})});else if(r.done)o.push({...b,s:0,r:0,w:0})}}}return o.sort((a,b)=>a.f<b.f?-1:a.f>b.f?1:a.s-b.s)}
+let F={mo:'',k:'',i:'',n:''};
+const fl=()=>rws().filter(r=>(!F.mo||r.mo==F.mo)&&(!F.k||r.k==F.k)&&(F.i===''||r.i==F.i)&&(!F.n||r.n==F.n));
+const ag=f=>{const m={};f.forEach(r=>{const a=m[r.n]=m[r.n]||[r.n,0,0,0,0];a[1]++;a[2]+=r.r;a[3]=Math.max(a[3],r.w);a[4]+=r.r*r.w});return Object.values(m)};
+const wlb=k=>{const[y,m,d]=k.split('-').map(Number),a=new Date(y,m-1,d),b=new Date(y,m-1,d+5);return a.getDate()+' '+M[a.getMonth()]+' – '+b.getDate()+' '+M[b.getMonth()]};
+const op2=(v,t,s)=>`<option value="${v}"${String(s)===String(v)?' selected':''}>${t}</option>`;
+function so(){document.getElementById('st').hidden=false;fr()}
+function sq(){document.getElementById('st').hidden=true}
+function fr(){const all=rws(),f=fl(),g=ag(f),rp=f.reduce((a,r)=>a+r.r,0),vl=f.reduce((a,r)=>a+r.r*r.w,0),mx=f.reduce((a,r)=>Math.max(a,r.w),0),dy=new Set(f.map(r=>r.f)).size,mo=[...new Set(all.map(r=>r.mo))],wk=[...new Set(all.map(r=>r.k))],nm=[...new Set(D.flat().map(e=>e[0]))];
+document.getElementById('si').innerHTML=`<div class="top"><h1>Estadísticas</h1><button class="ib" onclick="sq()">✕ Cerrar</button></div><div class="fl"><select onchange="F.mo=this.value;fr()">${op2('','Todos los meses',F.mo)}${mo.map(m=>op2(m,MN[+m.slice(5)-1]+' '+m.slice(0,4),F.mo)).join('')}</select><select onchange="F.k=this.value;fr()">${op2('','Todas las semanas',F.k)}${wk.map(k=>op2(k,wlb(k),F.k)).join('')}</select><select onchange="F.i=this.value;fr()">${op2('','Todos los días',F.i)}${N.map((n,i)=>op2(i,n,F.i)).join('')}</select><select onchange="F.n=this.value;fr()">${op2('','Todos los ejercicios',F.n)}${nm.map(n=>op2(n,n,F.n)).join('')}</select></div><div class="sm"><div><b>${dy}</b><span>días</span></div><div><b>${f.length}</b><span>series hechas</span></div><div><b>${rp}</b><span>repeticiones</span></div><div><b>${Math.round(vl)}</b><span>kg totales</span></div><div><b>${mx}</b><span>kg máximo</span></div><div><b>${g.length}</b><span>ejercicios</span></div></div>${g.length?`<table class="tb2"><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Kg máx</th><th>Kg tot.</th></tr>${g.map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td><td>${a[3]}</td><td>${Math.round(a[4])}</td></tr>`).join('')}</table>`:'<p class="hint">Aún no hay series registradas con estos filtros.</p>'}<div class="ab"><button class="p" onclick="xp(0)">⬇ Detalle CSV</button><button class="p" onclick="xp(1)">⬇ Resumen CSV</button></div><div class="ab"><button class="p" onclick="xx().catch(e=>alert('Error al crear el Excel: '+e.message))">Excel (.xlsx)</button><button class="p" onclick="xf().catch(e=>alert('Error al crear el PDF: '+e.message))">PDF con gráficas</button></div><div class="ab"><label class="fb">Cargar CSV<input type="file" accept=".csv,text/csv,text/plain" onchange="im(this)" hidden></label><button onclick="F={mo:'',k:'',i:'',n:''};fr()">Limpiar filtros</button></div><p class="hint" id="ms"></p>`}
+async function xp(m){const f=fl(),q=v=>'"'+String(v).replace(/"/g,'""')+'"',rows=m?[['Ejercicio','Series','Repeticiones','Kg máximo','Kg totales']].concat(ag(f).map(a=>[q(a[0]),a[1],a[2],a[3],Math.round(a[4])])):[['Fecha','Semana','Día','Ejercicio','Serie','Repeticiones','Kg','Kg totales']].concat(f.map(r=>[r.f,q(wlb(r.k)),N[r.i],q(r.n),r.s||'',r.r,r.w,r.r*r.w]));await sv2('rutina-'+(m?'resumen-':'detalle-')+fd(new Date())+'.csv','\ufeff'+rows.map(a=>a.join(';')).join('\n'))}
+const dl=f=>{const[y,m,d]=f.split('-').map(Number);return N[(new Date(y,m-1,d).getDay()+6)%7].toLowerCase()+' '+d+' '+M[m-1]};
+function ch(cu,pv){const n=Math.max(cu.length,pv.length,3),mx=Math.max(1,...cu,...pv),W=300,H=104,x=i=>20+i*(W-40)/(n-1),y=v=>H-18-v/mx*(H-34),pl=(a,cl,d)=>a.length?`<polyline fill="none" stroke="${cl}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" ${d?'stroke-dasharray="6 5"':''} points="${a.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`+a.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${cl}"/>`).join(''):'';return`<svg viewBox="0 0 ${W} ${H}" width="100%">${pl(pv,'var(--mu)',1)}${pl(cu,'var(--dc)',0)}${Array.from({length:n},(_,i)=>`<text x="${x(i)}" y="${H-2}" text-anchor="middle" font-size="11" fill="var(--mu)">S${i+1}</text>`).join('')}</svg>`}
+function sb(h,cur){const a=h.slice(-7);if(cur>0)a.push({l:'Hoy',v:cur,t:1});if(a.length<2)return'';const mx=Math.max(...a.map(s=>s.v),1),bw=300/a.length;return`<p class="hint">Progresión por sesión (kg acumulados)</p><svg viewBox="0 0 300 96" width="100%">${a.map((s,i)=>{const hh=Math.max(3,s.v/mx*54);return`<rect x="${i*bw+bw*.15}" y="${72-hh}" width="${bw*.7}" height="${hh}" rx="4" fill="${s.t?'var(--dc)':'var(--ln)'}"/><text x="${i*bw+bw/2}" y="${68-hh}" text-anchor="middle" font-size="10" fill="var(--tx)">${Math.round(s.v)}</text><text x="${i*bw+bw/2}" y="90" text-anchor="middle" font-size="10" fill="var(--mu)">${s.l}</text>`}).join('')}</svg>`}
+function hx(i,j,r){const e=D[i][j],a=mon(wo),cf=fd(new Date(a.getFullYear(),a.getMonth(),a.getDate()+i)),dr=parseInt(e[2])||1,m={};rws().forEach(q=>{if(q.n==e[0]&&q.s&&q.f<cf)(m[q.f]=m[q.f]||[]).push(q)});const H=Object.keys(m).sort().map(f=>{let t=0;const u=m[f].map(q=>t+=(q.r||q.dr)*q.w);return{f,n:m[f].length,mx:Math.max(...m[f].map(q=>q.w)),v:t,u}});let tv=0;const cu=[];(r.s||[]).forEach(q=>{if(q&&q.x){tv+=(+q.r||dr)*(+q.w||0);cu.push(tv)}});const pv=H[H.length-1],msg=pv?`Última vez (${dl(pv.f)}): ${pv.n} series · ${pv.mx} kg máx · ${Math.round(pv.v)} kg acumulados. `+(tv>pv.v?`¡Superado! +${Math.round(tv-pv.v)} kg 🔥`:'¡Supéralo! 💪'):'Primera vez con este ejercicio: ¡marca tu punto de partida!';const sg=sg2(e,H,m,r);return`<div class="hsb"><p class="hm">${msg}</p>${sg}`+(pv||tv?ch(cu,pv?pv.u:[])+`<p class="hint">Kg acumulados por serie: <b style="color:var(--dc)">hoy</b> · línea discontinua = última vez</p>`+sb(H.map(h=>({l:h.f.slice(8)+'/'+h.f.slice(5,7),v:h.v})),tv):'')+'</div>'}
+function dlf(n,data){const b=data instanceof Blob?data:new Blob([data]),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(u)},5000)}
+async function sv2(n,data){let d=null;try{d=window.claude&&await claude.use('downloads')}catch(e){}if(!d){try{dlf(n,data)}catch(e){alert('No se pudo descargar el archivo ('+e.message+')')}return}try{await d.save({filename:n,data})}catch(e){if(!e||e.code!='declined')alert('No se pudo guardar el archivo ('+((e&&(e.code||e.message))||e)+')')}}
+async function xx(){if(!await ld('XLSX',XU)){alert('No se pudo cargar el módulo de Excel. Comprueba la conexión.');return}const f=fl(),wb=XLSX.utils.book_new(),ad=(a,n)=>XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(a),n),pg={};f.forEach(r=>{if(!r.s)return;const k=r.f+'|'+r.n,a=pg[k]=pg[k]||[r.f,r.n,0,0,0];a[2]++;a[3]=Math.max(a[3],r.w);a[4]+=(r.r||r.dr)*r.w});
+ad([['Ejercicio','Series','Repeticiones','Kg máximo','Kg totales']].concat(ag(f).map(a=>[a[0],a[1],a[2],a[3],Math.round(a[4])])),'Resumen');ad([['Fecha','Ejercicio','Series','Kg máximo','Kg acumulados']].concat(Object.keys(pg).sort().map(k=>pg[k])),'Progresión');ad([['Fecha','Semana','Día','Ejercicio','Serie','Repeticiones','Kg','Kg totales']].concat(f.map(r=>[r.f,wlb(r.k),N[r.i],r.n,r.s||'',r.r,r.w,r.r*r.w])),'Detalle');await sv2('rutina-'+fd(new Date())+'.xlsx',XLSX.write(wb,{bookType:'xlsx',type:'array'}))}
+async function xf(){if(!await ld('jspdf',JU)){alert('No se pudo cargar el módulo de PDF. Comprueba la conexión.');return}const J=window.jspdf.jsPDF;const f=fl(),g=ag(f),d=new J({unit:'pt',format:'a4'}),M0=40;let y=50;const br=()=>{if(y>770){d.addPage();y=50}};
+d.setFontSize(22);d.text('Estadísticas de mi rutina',M0,y);y+=20;d.setFontSize(10);d.setTextColor(110);d.text([F.mo&&'Mes '+F.mo,F.k&&'Semana '+wlb(F.k),F.i!==''&&N[F.i],F.n].filter(Boolean).join(' · ')||'Sin filtros',M0,y);y+=24;d.setTextColor(0);
+const rp=f.reduce((a,r)=>a+r.r,0),vl=f.reduce((a,r)=>a+r.r*r.w,0),mx=f.reduce((a,r)=>Math.max(a,r.w),0),dy=new Set(f.map(r=>r.f)).size;d.setFontSize(12);d.text(dy+' días · '+f.length+' series hechas · '+rp+' repeticiones · '+Math.round(vl)+' kg totales · máx. '+mx+' kg',M0,y);y+=28;
+d.setFontSize(14);d.text('Kg totales por ejercicio',M0,y);y+=16;const tq=g.slice().sort((a,b)=>b[4]-a[4]).slice(0,12),m1=Math.max(1,...tq.map(a=>a[4]));tq.forEach(a=>{br();d.setFontSize(9);d.text(a[0].slice(0,32),M0,y+9);const w=a[4]/m1*260;d.setFillColor(61,155,255);d.rect(200,y,Math.max(2,w),11,'F');d.text(Math.round(a[4])+' kg',206+w,y+9);y+=17});y+=16;
+const dv={};f.forEach(r=>{dv[r.f]=(dv[r.f]||0)+r.r*r.w});const ks=Object.keys(dv).sort().slice(-14);if(ks.length){if(y>600){d.addPage();y=50}d.setFontSize(14);d.text('Kg acumulados por día',M0,y);y+=16;const m2=Math.max(1,...ks.map(k=>dv[k])),bw=500/ks.length;ks.forEach((k,i)=>{const h=dv[k]/m2*110;d.setFillColor(46,213,115);d.rect(M0+i*bw+bw*.12,y+120-h,bw*.76,h,'F');d.setFontSize(8);d.text(String(Math.round(dv[k])),M0+i*bw+bw/2,y+116-h,{align:'center'});d.text(k.slice(8)+'/'+k.slice(5,7),M0+i*bw+bw/2,y+133,{align:'center'})});y+=160}
+br();d.setFontSize(14);d.text('Resumen por ejercicio',M0,y);y+=16;const cx=[M0,280,340,400,470];d.setFontSize(9);d.setTextColor(110);['Ejercicio','Series','Reps','Kg máx','Kg tot.'].forEach((t,i)=>d.text(t,cx[i],y));y+=12;d.setTextColor(0);g.forEach(a=>{br();[a[0].slice(0,40),a[1],a[2],a[3],Math.round(a[4])].forEach((t,i)=>d.text(String(t),cx[i],y));y+=14});await sv2('rutina-'+fd(new Date())+'.pdf',d.output('arraybuffer'))}
+function pcsv(t){const l0=t.split('\n')[0],sp=l0.split(';').length>=l0.split(',').length?';':',',o=[];let r=[],c='',q=0;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h=='"'){if(t[i+1]=='"'){c+='"';i++}else q=0}else c+=h}else if(h=='"')q=1;else if(h==sp){r.push(c);c=''}else if(h=='\n'||h=='\r'){if(h=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';if(r.some(x=>x!==''))o.push(r);r=[]}else c+=h}r.push(c);if(r.some(x=>x!==''))o.push(r);return o}
+function im(inp){const fi=inp.files[0];if(!fi)return;const fr2=new FileReader();fr2.onload=()=>{const rows=pcsv(String(fr2.result).replace(/^\ufeff/,'')),h=(rows.shift()||[]).map(s=>s.trim()),ix=n=>h.indexOf(n),cF=ix('Fecha'),cE=ix('Ejercicio'),cS=ix('Serie'),cR=ix('Repeticiones'),cK=ix('Kg'),tc=[],nu=v=>String(v||'').replace(',','.');let n=0,bad=0,msg;if(cF<0||cE<0||cS<0||cK<0)msg='Este archivo no es un "Detalle CSV" de la app.';else{rows.forEach(a=>{const[y,m,d]=(a[cF]||'').split('-').map(Number);if(!y){bad++;return}const dt=new Date(y,m-1,d),i=(dt.getDay()+6)%7;if(i>5){bad++;return}const j=D[i].findIndex(e=>e[0]==a[cE]);if(j<0){bad++;return}const k=ky(new Date(y,m-1,d-i)),w=S.w[k]=S.w[k]||{},dd=w['d'+i]=w['d'+i]||{},r=dd['e'+j]=dd['e'+j]||{done:0,s:[]},s=parseInt(a[cS]);if(D[i][j][1]&&s>0){r.s[s-1]={r:nu(a[cR]),w:nu(a[cK]),x:1};r.n=Math.max(r.n||3,s);if(+nu(a[cK])>0)(S.l[i+'_'+j]=S.l[i+'_'+j]||[])[s-1]=nu(a[cK]);tc.push(r)}else r.done=1;n++});tc.forEach(r=>{if(ck(r)>=3)r.done=1});sv();rn();msg='Cargadas '+n+' filas'+(bad?' · '+bad+' omitidas':'')+'.'}inp.value='';fr();document.getElementById('ms').textContent=msg};fr2.readAsText(fi)}
+let VZ=S.vz!==0,PN=-1,PE=0,PI=0,PQ=0,PL=-1,PD=0,PJ=0;
+const p2=k=>'inclinación '+IV[k][1]+', velocidad '+IV[k][2];
+function spk(t){if(!VZ)return;try{const s=window.speechSynthesis;if(!s)return;s.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';s.speak(u)}catch(e){}}
+function vzl(){const b=document.getElementById('vzb');if(b)b.textContent='🗣 Voz: '+(VZ?'sí':'no')}
+function vzt(){VZ=!VZ;S.vz=VZ?1:0;sv();vzl()}
+function pr(){const k=PN,n=IV[k],x=IV[k+1];document.getElementById('pk').innerHTML=`<div class="tl">Fase ${k+1} de 5<small>Inclinación ${n[1]} · Velocidad ${n[2]}</small></div><div id="pn">5:00</div><div class="tl"><small>${x?'Siguiente: fase '+(k+2)+' → inclinación '+x[1]+' · velocidad '+x[2]:'Última fase'}</small></div><div class="tc"><button onclick="pp()" id="ppb">${PQ?'Reanudar':'Pausar'}</button><button class="p" onclick="ps()">Saltar fase</button><button onclick="pq()">Terminar</button></div><button class="rs" id="vzb" onclick="vzt()"></button>`;vzl()}
+function ph0(i,j,k){au();ul();PD=i;PJ=j;PN=k;PE=Date.now()+300000;PQ=0;PL=-1;document.getElementById('ph').hidden=false;clearInterval(PI);PI=setInterval(pt,150);try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>{WL=l}).catch(()=>{})}catch(e){}ka();pr();spk('Fase '+(k+1)+'. '+p2(k)+'. Cinco minutos.');pt()}
+function pt(){if(PQ||PN<0)return;const r=Math.ceil((PE-Date.now())/1000),q=Math.max(r,0),el=document.getElementById('pn');if(el){el.textContent=Math.floor(q/60)+':'+String(q%60).padStart(2,'0');el.className=r>0&&r<=3?'z':''}if(r===PL)return;PL=r;if(MX&&r<=5)au();if(PN<4&&r==10)spk('En diez segundos, fase '+(PN+2)+': '+p2(PN+1));if(r==1){bp(.95,1175);vb(600)}else if(r>0&&r<=3){bp(.18,880);vb(90)}if(r<=0)pe()}
+function pe(){const r=rc(PD,PJ);r.ph=r.ph||[];r.ph[PN]=1;tm(PD);if(r.ph.filter(Boolean).length>=5)r.done=1;sv();rn();if(PN<4){PN++;PE=Date.now()+300000;PL=-1;pr();spk('Fase '+(PN+1)+'. '+p2(PN)+'.');vb([300,100,300])}else{clearInterval(PI);PN=-1;kx();spk('Cinta terminada. ¡Enhorabuena!');document.getElementById('pk').innerHTML='<div class="tl">¡Cinta completada! 💪</div><div class="tc"><button class="p" onclick="pq()">Cerrar</button></div>'}}
+function pp(){if(PQ){PE=Date.now()+PQ;PQ=0}else PQ=Math.max(1,PE-Date.now());const b=document.getElementById('ppb');if(b)b.textContent=PQ?'Reanudar':'Pausar'}
+function ps(){if(PN>=4){pq();return}PN++;PE=Date.now()+300000;PQ=0;PL=-1;pr();spk('Fase '+(PN+1)+'. '+p2(PN)+'.')}
+function pq(){clearInterval(PI);PN=-1;PQ=0;kx();try{if(WL)WL.release()}catch(e){}WL=null;try{speechSynthesis.cancel()}catch(e){}document.getElementById('ph').hidden=true}
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function ap(){D0.forEach((d,i)=>{D[i]=d.map((e,j)=>{const o=(S.ed||{})[i+'_'+j],c=e.slice();if(o)for(const f in o)c[+f]=o[f];return c})});(S.ad||[]).forEach(a=>{if(D[a.i])D[a.i].push([a.n,3,a.r||'10–12',a.t||60,'',0])})}
+let DB=null,PT2=0;const DEV=Math.random().toString(36).slice(2);
+function ps2(){clearTimeout(PT2);PT2=setTimeout(()=>{if(DB)DB.set({j:JSON.stringify(S),t:S.t||Date.now(),d:DEV}).catch(()=>{})},1500)}
+async function cs(){try{const db=window.claude&&await claude.use('db'),u=window.claude&&await claude.use('user');if(!db||!u)return;const id=await u.id();if(!id)return;DB=db.doc('data/users/'+id+'/rut');DB.onSnapshot(s=>{if(!s.exists){ps2();return}const d=s.data();if(d.d===DEV)return;const rt=d.t||0,lt=S.t||0;if(rt>lt){try{S=JSON.parse(d.j);S.r=S.r||{};try{localStorage.setItem('rut1',d.j)}catch(e){}ap();rn();if(!document.getElementById('st').hidden)fr()}catch(e){}}else if(rt<lt)ps2()});document.querySelector('.top h1').insertAdjacentHTML('beforeend',' <span title="Sincronizado">☁️</span>')}catch(e){}}
+function tm(i){const k=K()+'|'+i,t=Date.now(),a=S.ss=S.ss||{};a[k]=a[k]||{a:t};a[k].b=t}
+function nts(i,j,v){(S.nt=S.nt||{})[D[i][j][0]]=v;sv()}
+function sg2(e,H,m,r){const pv=H[H.length-1];if(!pv)return'';let o='';const hi=parseInt(e[2].split('–')[1]||e[2])||10,lo=parseInt(e[2])||8,top=m[pv.f].filter(q=>q.w==pv.mx);if(pv.mx>0)o+=top.length>=3&&top.every(q=>(q.r||0)>=hi)?`💡 Sugerencia: sube a ${pv.mx+2.5} kg y busca ${lo} reps.`:`💡 Sugerencia: repite ${pv.mx} kg y busca una repetición más por serie.`;const bm=Math.max(...H.map(h=>h.mx));let cm=0;(r.s||[]).forEach(q=>{if(q&&q.x)cm=Math.max(cm,+q.w||0)});if(bm>0)o+=cm>bm?` 🏆 ¡Récord personal! ${cm} kg (antes ${bm} kg).`:` Récord: ${bm} kg.`;return o?`<p class="hm" style="color:var(--dc)">${o}</p>`:''}
+function pw(o,i){const w=wo;wo=o;try{return pc(i)}finally{wo=w}}
+function rkf(){const td=(new Date().getDay()+6)%7,vv=[];for(let o=-51;o<=0;o++)for(let i=0;i<6;i++)if(o<0||i<=td)vv.push(pw(o,i)[2]);let best=0,run=0;vv.forEach(p=>{if(p>=100){run++;best=Math.max(best,run)}else run=0});let k=vv.length-1,cur=0;if(vv[k]<100)k--;while(k>=0&&vv[k]>=100){cur++;k--}let wp=0;for(let o=0;o>=-51;o--){if([0,1,2,3,4,5].every(i=>pw(o,i)[2]>=100))wp++;else if(o<0)break}let c2='';for(let o=-3;o<=0;o++)for(let i=0;i<6;i++){const p=pw(o,i)[2],fu=o==0&&i>td;c2+=`<i style="${p>0&&!fu?`background:${C[i]};color:var(--on);opacity:${p>=100?1:.3+p/150}`:''}">${p>=100?'✓':L[i]}</i>`}document.getElementById('rk').innerHTML=`<div class="wcard"><h2>Rachas <span>${cur} 🔥</span></h2><p class="wm">Días seguidos al 100%: ${cur} · mejor racha: ${best} · semanas perfectas seguidas: ${wp}</p><div class="rk">${c2}</div><p class="hint">Últimas 4 semanas (cada fila es una semana)</p></div>`}
+function eo(){document.getElementById('ed').hidden=false;er()}
+function eq(){document.getElementById('ed').hidden=true;rn()}
+function er(){let h=`<div class="top"><h1>Editar ${N[di]}</h1><button class="ib" onclick="eq()">✕ Cerrar</button></div><p class="hint">Cambia nombre, repeticiones, descanso o descripción. «Quitar» oculta el ejercicio sin borrar tu historial. Los nuevos aparecen al final del día.</p>`;D[di].forEach((e,j)=>{if(e[6])return;h+=`<div class="ex" style="padding:12px"><input class="ei" value="${esc(e[0])}" onchange="ee(${j},0,this.value)"><div class="fl"><input class="ei" value="${esc(e[2])}" placeholder="Reps" onchange="ee(${j},2,this.value)"><input class="ei" value="${esc(e[3])}" placeholder="Descanso (s)" onchange="ee(${j},3,this.value)"></div><textarea class="nt" onchange="ee(${j},4,this.value)">${esc(e[4])}</textarea><button class="ib" style="margin-top:8px" onclick="er2(${j})">Quitar</button></div>`});h+=`<div class="ex" style="padding:12px"><b>Añadir ejercicio</b><input class="ei" id="an" placeholder="Nombre"><div class="fl"><input class="ei" id="ar" placeholder="Reps (ej. 10–12)"><input class="ei" id="at" placeholder="Descanso (seg)"></div><button class="ib" style="margin-top:8px" onclick="ea2()">+ Añadir</button></div>`;document.getElementById('ei2').innerHTML=h}
+function ee(j,f,v){const k=di+'_'+j,o=(S.ed=S.ed||{})[k]=S.ed[k]||{};o[f]=v;sv();ap()}
+function er2(j){ee(j,6,1);er()}
+function ea2(){const n=document.getElementById('an').value.trim();if(!n)return;(S.ad=S.ad||[]).push({i:di,n,r:document.getElementById('ar').value||'10–12',t:document.getElementById('at').value||60});sv();ap();er()}
+const CD=C.slice(),CL=['#e0283a','#1f7fe0','#14a85a','#e07f00','#8a3fd6','#b88f00'];
+function th(m){const l=m=='light';document.documentElement.setAttribute('data-theme',m);(l?CL:CD).forEach((c,i)=>{C[i]=c});try{localStorage.setItem('rut_th',m)}catch(e){}const b=document.getElementById('thb');if(b)b.textContent=l?'🌙':'☀️'}
+function tht(){th(document.documentElement.getAttribute('data-theme')=='light'?'dark':'light');rn()}
+function thi(){let m=null;try{m=localStorage.getItem('rut_th')}catch(e){}if(m!='light'&&m!='dark')m=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';th(m)}
+function ld(g,us){return new Promise(ok=>{if(window[g])return ok(true);let i=0;const nx=()=>{if(i>=us.length)return ok(false);const e=document.createElement('script');e.src=us[i++];e.onload=()=>{if(window[g])ok(true);else nx()};e.onerror=nx;document.head.appendChild(e)};nx()})}
+const XU=['https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'],JU=['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js'];
+function rn(){
+document.documentElement.style.setProperty('--dc',C[di]);
+const a=mon(wo),b=new Date(a);b.setDate(b.getDate()+5);
+document.getElementById('wl').textContent=wo==0?'Esta semana':a.getDate()+' '+M[a.getMonth()]+' – '+b.getDate()+' '+M[b.getMonth()];
+const td=(new Date().getDay()+6)%7;
+document.getElementById('tabs').innerHTML=D.map((_,i)=>{const p=pc(i)[2];return`<button class="tb${i==di?' on':''}${p==100?' ok':''}" onclick="sd(${i})"><b>${L[i]}</b><i>${p==100?'✓ 100':p+'%'}</i></button>`}).join('');
+const[k,n,p]=pc(di),lu=wo==0&&di==td?' · hoy':'';
+let xs=0,xe=0;D[di].forEach((e,j)=>{if(e[1]&&!e[6]){xs+=Math.max(0,ck(gt(di,j))-3);xe+=Math.max(0,ep(di,j)-100)}});xe=Math.round(xe/n);const sx=(S.ss||{})[K()+'|'+di],dur=sx?' · '+Math.max(1,Math.round((sx.b-sx.a)/60000))+' min (desde las '+new Date(sx.a).toTimeString().slice(0,5)+')':'';
+let h=`<div class="hero${xe?' x':''}"><div class="ring" style="--p:${p}"><div>${p}%</div></div>${xe?`<div class="ring r2" style="--p:${Math.min(xe,100)}"><div>+${xe}%</div></div>`:''}<div><h2>${N[di]}${lu}</h2><p>${T[di]}</p><p class="${p==100?'win':''}">${p==100?'¡Día completado! 💪':k+' de '+n+' ejercicios'}${xs?' · '+xs+' series extra':''}${dur}</p></div></div>`;
+D[di].forEach((e,j)=>{if(e[6])return;const r=gt(di,j)||{s:[]},o=op===j,st=e[1]>0,pp=ep(di,j),dn=pp>=100,l=S.l[di+'_'+j]||[];
+h+=`<div class="ex${dn?' done':''}${o?' open':''}"><div class="hd"><button class="ck" onclick="tg(${di},${j})" aria-label="Marcar ${e[0]}">✓</button><button class="nm" onclick="ex(${j})"><b>${e[0]}</b><small>${st?e[2]+' reps · descanso '+rr(di,j)+' s':e[2]}</small></button>${(st||e[5]=='t')&&pp?`<span class="mr" style="--p:${Math.min(pp,100)}"><i>${Math.min(pp,100)}</i></span>${pp>100?`<span class="mr xr" style="--p:${Math.min(pp-100,100)}"><i>+${pp-100}</i></span>`:''}`:''}<span class="chev" onclick="ex(${j})">▼</span></div>`;
+if(o){h+=`<div class="sets"><p class="ds">${e[4]}</p>${Q[e[0]]?`<a class="ph" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent('Life Fitness '+Q[e[0]])}">📷 Ver foto de la máquina</a>`:''}`;
+if(e[5]=='t'){const ph=r.ph||[];h+=IV.map((v,k)=>`<div class="ivr"><span>${ph[k]?'✓ ':''}Fase ${k+1} · ${v[0]} min</span><span>Inclinación ${v[1]} · Velocidad ${v[2]}</span><button class="ivb" onclick="ph0(${di},${j},${k})" aria-label="Iniciar fase ${k+1}">▶</button></div>`).join('')+'<p class="hint">Pulsa ▶ para empezar en esa fase. Al acabar cada fase de 5 min, la app te avisa con pitidos y voz del siguiente cambio y arranca la siguiente.</p>'}
+if(st){const m=ns(di,j);h+=`<textarea class="nt" placeholder="Notas de esta máquina (altura del asiento, agarre, ajustes…)" oninput="nts(${di},${j},this.value)">${esc((S.nt||{})[e[0]])}</textarea>`;h+=`<div class="rr"><span>Descanso entre series <button class="ib" onclick="tp()" style="height:34px;padding:0 10px" aria-label="Probar pitidos">🔔</button></span><label><input type="number" inputmode="numeric" value="${rr(di,j)}" onchange="ss(${di},${j},this.value)"><em>seg</em></label></div>`;for(let s=0;s<m;s++){const q=r.s[s]||{},lw=l[s]!=null?l[s]:'';
+h+=`<div class="sr"><span>${s+1}</span><label><input type="number" inputmode="numeric" placeholder="${e[2].split('–')[0].replace(/\D.*/,'')||'0'}" value="${q.r||''}" oninput="inp(${di},${j},${s},'r',this.value)"><em>reps</em></label><label><input type="number" inputmode="decimal" step="0.5" placeholder="${lw}" value="${q.w||''}" oninput="inp(${di},${j},${s},'w',this.value)"><em>kg</em></label><button class="${q.x?'x':''}" onclick="sc(${di},${j},${s})" aria-label="Serie ${s+1} hecha">✓</button></div>`}
+h+=`<div class="ab"><button class="p" onclick="ad(${di},${j})">+ Añadir serie</button>${m>3?`<button onclick="rm(${di},${j})">Quitar última</button>`:''}</div><p class="hint">${l.some(v=>v)?'Última vez: '+l.map(v=>v||'–').join(' / ')+' kg · ':''}3 series = 100%, cada serie extra suma un 33%.</p>`+hx(di,j,r)}
+h+='</div>'}
+h+='</div>'});
+document.getElementById('main').innerHTML=h;
+let tk=0,tn=0,full=0,bs='';
+D.forEach((_,i)=>{const q=pc(i);tk+=q[0];tn+=q[1];if(q[2]==100)full++;bs+=`<div class="br"><b>${L[i]}</b><div class="bar"><i style="width:${q[2]}%;background:${C[i]}"></i></div><em>${q[2]==100?'✓':q[2]+'%'}</em></div>`});
+let ws=0;D.forEach((_,i)=>{ws+=pc(i)[2]});const tp=Math.round(ws/6);
+document.getElementById('wk').innerHTML=`<div class="wcard"><h2>Semana <span>${tp}%</span></h2><p class="wm">${tp==100?'¡Semana perfecta! 🔥':full+' de 6 días al 100% · '+tk+' de '+tn+' ejercicios · te faltan '+(tn-tk)}</p>${bs}</div>`;rkf()}
+thi();rn();cs();
+</script></body></html>
